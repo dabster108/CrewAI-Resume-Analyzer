@@ -53,3 +53,4 @@ For support, questions, or feedback regarding the LatestPdfAnalyzer Crew or crew
 
 Let's create wonders together with the power and simplicity of crewAI.
 # CrewAI-Resume-Analyzer
+
