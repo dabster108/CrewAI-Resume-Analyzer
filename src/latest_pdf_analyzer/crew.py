@@ -52,5 +52,6 @@ class ResumeAnalyzerCrew:
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            verbose=True
+            verbose=True,
+            tracing=True
         )
