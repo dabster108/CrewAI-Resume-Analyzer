@@ -1,0 +1,34 @@
+analyze_resume:
+  description: >
+    Carefully analyze the following resume:
+
+    {resume}
+
+    Extract and structure the following information:
+    - Full Name
+    - Contact Information
+    - Education
+    - Technical Skills
+    - Soft Skills
+    - Work Experience
+    - Projects
+    - Certifications
+
+    Present the output in clear headings and bullet points.
+  expected_output: >
+    A structured and well-formatted resume analysis report.
+
+evaluate_resume:
+  description: >
+    Based on the resume analysis above, provide a professional HR evaluation including:
+
+    - Key Strengths
+    - Weaknesses or Missing Areas
+    - Skill Gaps
+    - Suggestions for Improvement
+    - ATS Compatibility Score (out of 10)
+    - Overall Hiring Recommendation (Yes / Maybe / No)
+
+    Keep the tone professional and constructive.
+  expected_output: >
+    A detailed HR-style evaluation report with scoring.
