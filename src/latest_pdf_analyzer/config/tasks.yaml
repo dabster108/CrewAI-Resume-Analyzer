@@ -4,31 +4,62 @@ analyze_resume:
 
     {resume}
 
-    Extract and structure the following information:
-    - Full Name
-    - Contact Information
-    - Education
-    - Technical Skills
-    - Soft Skills
-    - Work Experience
-    - Projects
-    - Certifications
+    Extract and return STRICT JSON in this format:
 
-    Present the output in clear headings and bullet points.
-  expected_output: >
-    A structured and well-formatted resume analysis report.
+    {
+      "Full Name": "",
+      "Contact Information": "",
+      "Professional Summary": "",
+      "Education": [],
+      "Technical Skills": [],
+      "Soft Skills": [],
+      "Work Experience": [],
+      "Projects": [],
+      "Certifications": []
+    }
+
+    Only return valid JSON.
+  expected_output: Structured JSON.
 
 evaluate_resume:
   description: >
-    Based on the resume analysis above, provide a professional HR evaluation including:
+    Based on the structured resume data above, provide a professional HR evaluation.
 
-    - Key Strengths
-    - Weaknesses or Missing Areas
-    - Skill Gaps
-    - Suggestions for Improvement
-    - ATS Compatibility Score (out of 10)
-    - Overall Hiring Recommendation (Yes / Maybe / No)
+    Format exactly like this:
 
-    Keep the tone professional and constructive.
-  expected_output: >
-    A detailed HR-style evaluation report with scoring.
+    Key Strengths
+    • Bullet point
+
+    Weaknesses
+    • Bullet point
+
+    Skill Gaps
+    • Bullet point
+
+    Suggestions for Improvement
+    • Bullet point
+
+    ATS Compatibility Score
+    Short explanation
+
+    Overall Hiring Recommendation
+    Detailed paragraph.
+
+    Do NOT return JSON.
+    Only formatted text.
+  expected_output: Professional HR evaluation text.
+
+rewrite_resume:
+  description: >
+    Using the structured JSON above, rewrite and optimize the resume
+    into a professional, ATS-friendly version.
+
+    Requirements:
+    - Strong action verbs
+    - Clean section headings
+    - Bullet points for experience
+    - Modern formatting
+    - No HR comments
+
+    Output only the final improved resume.
+  expected_output: Final professional resume text.

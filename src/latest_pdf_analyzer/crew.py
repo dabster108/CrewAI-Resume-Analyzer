@@ -1,16 +1,14 @@
 import os
 from dotenv import load_dotenv
-from crewai import Agent, Task, Crew, LLM
+from crewai import Agent, Task, Crew, LLM, Process
 from crewai.project import CrewBase, agent, task, crew
 
 load_dotenv()
 
-# Create LLM using Groq model
 llm = LLM(
-    model=os.getenv("MODEL"),
+    model=os.getenv("MODEL"),  # groq/llama-3.1-70b-versatile
     temperature=0.3
 )
-
 
 @CrewBase
 class ResumeAnalyzerCrew:
@@ -22,14 +20,16 @@ class ResumeAnalyzerCrew:
     def resume_analyst(self) -> Agent:
         return Agent(
             config=self.agents_config["resume_analyst"],
-            llm=llm
+            llm=llm,
+            verbose=True
         )
 
     @agent
     def hr_evaluator(self) -> Agent:
         return Agent(
             config=self.agents_config["hr_evaluator"],
-            llm=llm
+            llm=llm,
+            verbose=True
         )
 
     @task
@@ -47,11 +47,26 @@ class ResumeAnalyzerCrew:
             context=[self.analyze_resume()]
         )
 
+    @task
+    def rewrite_resume(self) -> Task:
+        return Task(
+            config=self.tasks_config["rewrite_resume"],
+            agent=self.resume_analyst(),
+            context=[self.analyze_resume()]
+        )
+
     @crew
     def crew(self) -> Crew:
         return Crew(
-            agents=self.agents,
-            tasks=self.tasks,
-            verbose=True,
-            tracing=True
+            agents=[
+                self.resume_analyst(),
+                self.hr_evaluator()
+            ],
+            tasks=[
+                self.analyze_resume(),
+                self.evaluate_resume(),
+                self.rewrite_resume()
+            ],
+            process=Process.sequential,
+            verbose=True
         )
