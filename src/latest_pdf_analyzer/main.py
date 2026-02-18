@@ -29,7 +29,7 @@ def create_pdf(resume_text, filename):
     doc.build(elements)
     return file_path
 
-@app.post("/upload")
+@app.post("/upload") # analyzed file 
 async def upload_resume(file: UploadFile = File(...)):
     content = await file.read()
     resume_text = content.decode("utf-8", errors="ignore")
